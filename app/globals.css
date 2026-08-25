@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-inter: var(--font-inter), system-ui, sans-serif;
+  --font-lora: var(--font-lora), Georgia, serif;
+}
+
+body {
+  font-family: var(--font-inter);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-lora);
+}
+
+.active {
+  color: rgb(125, 125, 255);
+}
