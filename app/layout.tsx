@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
 
   return (
     <html lang="en" className={`${inter.variable} ${lora.variable} ${theme}`}>
-      <body className="bg-blue-400 dark:bg-blue-950 dark:text-white">
+      <body className="bg-cream text-black dark:bg-green dark:text-gold">
         <ThemeContext>
           <Nav currentTheme={theme as Theme} />
           {children}

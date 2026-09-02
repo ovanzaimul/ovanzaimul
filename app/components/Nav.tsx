@@ -23,7 +23,7 @@ export default function Nav({ currentTheme }: NavProps) {
 
   return (
     <nav>
-      <ul className="flex items-center px-5 h-16 border-b-2 border-b-cyan-900 dark:text-white">
+      <ul className="flex items-center px-5 h-16 border-b-2 border-b-cyan-900 dark:text-gold">
         <li className="list-none mr-5">
           <Link href="/" className={pathname === "/" ? "active" : ""}>
             Home

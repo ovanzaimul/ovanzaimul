@@ -1,9 +1,16 @@
-export default async function Page({ params }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  console.log(slug);
+
+  const { default: MDXContent } = await import(`@/posts/${slug}.mdx`);
+
   return (
     <div>
-      <h2>This is my first blog post</h2>
+      <MDXContent />
+      <h1>this is content</h1>
     </div>
   );
 }
