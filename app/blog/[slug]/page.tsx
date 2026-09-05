@@ -10,7 +10,6 @@ export default async function Page({
   return (
     <div>
       <MDXContent />
-      <h1>this is content</h1>
     </div>
   );
 }

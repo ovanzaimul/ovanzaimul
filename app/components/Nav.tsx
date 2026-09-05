@@ -1,10 +1,11 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { FileText, Info, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { useThemeStore } from "../contexts/ThemeContext";
+import { Squiggly } from "./svgs/Squiggly";
 
 interface NavProps {
   currentTheme: "light" | "dark" | undefined;
@@ -22,17 +23,32 @@ export default function Nav({ currentTheme }: NavProps) {
   };
 
   return (
-    <nav>
-      <ul className="flex items-center px-5 h-16 border-b-2 border-b-cyan-900 dark:text-gold">
+    <nav className="max-w-4xl m-auto">
+      <ul className="flex items-center px-5 h-16 dark:text-gold">
         <li className="list-none mr-5">
-          <Link href="/" className={pathname === "/" ? "active" : ""}>
+          <Link href="/" className={`${pathname === "/" ? "active" : ""}`}>
             Ovan Zaimul
+            <Squiggly />
           </Link>
         </li>
 
         <li className="list-none mr-5">
-          <Link className={pathname === "/blog" ? "active" : ""} href="/blog">
-            Blogs
+          <Link
+            className={`flex gap-1 ${pathname === "/about" ? "active" : ""}`}
+            href="/about"
+          >
+            <Info />
+            About
+          </Link>
+        </li>
+
+        <li className="list-none mr-5">
+          <Link
+            className={`flex gap-1 ${pathname === "/blog" ? "active" : ""}`}
+            href="/blog"
+          >
+            <FileText />
+            Blog
           </Link>
         </li>
 
@@ -42,6 +58,7 @@ export default function Nav({ currentTheme }: NavProps) {
           </button>
         </li>
       </ul>
+      <Squiggly />
     </nav>
   );
 }

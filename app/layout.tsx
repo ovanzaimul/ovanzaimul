@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="bg-cream text-black dark:bg-green dark:text-gold">
         <ThemeContext>
           <Nav currentTheme={theme as Theme} />
-          {children}
+          <main className="max-w-4xl mx-auto mt-6">{children}</main>
         </ThemeContext>
       </body>
     </html>

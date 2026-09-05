@@ -2,6 +2,17 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 
+interface FrontMatter {
+  title: string;
+  publish_date: string;
+}
+
+interface PostData {
+  frontMatter: FrontMatter;
+  slug: string;
+  fileName: string;
+}
+
 const postsDirectory = path.join(process.cwd(), "posts");
 
 export default function getPostData() {
@@ -12,9 +23,9 @@ export default function getPostData() {
     const { data } = matter(str);
 
     return {
-      title: data.title,
+      frontMatter: data,
       slug: post.replace(/\.(md|mdx)$/, ""),
       fileName: post,
-    };
+    } as PostData;
   });
 }
