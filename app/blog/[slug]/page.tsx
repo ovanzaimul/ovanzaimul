@@ -1,3 +1,12 @@
+import getPostData from "@/app/utils/getPostData";
+
+export async function generateStaticParams() {
+  const data = getPostData();
+  return data.map((d) => ({
+    slug: d.slug,
+  }));
+}
+
 export default async function Page({
   params,
 }: {
