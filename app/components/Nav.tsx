@@ -7,19 +7,14 @@ import { usePathname } from "next/navigation";
 import { useThemeStore } from "../contexts/ThemeContext";
 import { Squiggly } from "./svgs/Squiggly";
 
-interface NavProps {
-  currentTheme: "light" | "dark" | undefined;
-}
-
-export default function Nav({ currentTheme }: NavProps) {
+export default function Nav() {
   const pathname = usePathname();
 
   const { updateTheme } = useThemeStore();
 
   const handleUpdateTheme = () => {
-    document.documentElement.classList.toggle("dark", currentTheme == "dark");
-    const nextTheme = currentTheme === "dark" ? "light" : "dark";
-    updateTheme(nextTheme);
+    const isDark = document.documentElement.classList.contains("dark");
+    updateTheme(isDark ? "light" : "dark");
   };
 
   return (
@@ -54,7 +49,9 @@ export default function Nav({ currentTheme }: NavProps) {
 
         <li className="ml-auto">
           <button className="cursor-pointer" onClick={handleUpdateTheme}>
-            {currentTheme == "dark" ? <Sun /> : <Moon />}
+            {/* {theme == "dark" ? <Sun /> : <Moon />} */}
+            <Sun className="hidden dark:inline" />
+            <Moon className="inline dark:hidden" />
           </button>
         </li>
       </ul>

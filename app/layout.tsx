@@ -3,8 +3,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import Nav from "./components/Nav";
-import ThemeContext, { Theme } from "./contexts/ThemeContext";
-import { cookies } from "next/headers";
+import ThemeContext from "./contexts/ThemeContext";
 
 export const metadata: Metadata = {
   title: {
@@ -26,14 +25,32 @@ const lora = Lora({
 });
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const cookie = await cookies();
-  const theme = cookie.get("theme")?.value || "dark";
-
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable} ${theme}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${lora.variable} `}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          id="theme-script"
+          dangerouslySetInnerHTML={{
+            __html: `
+          (function() {
+            const theme = localStorage.getItem('theme');
+            if(theme == "dark"){
+              document.documentElement.classList.add("dark")
+              }
+              })();
+              `,
+          }}
+        />
+      </head>
       <body className="bg-cream text-black dark:bg-green dark:text-gold">
         <ThemeContext>
-          <Nav currentTheme={theme as Theme} />
+          <header>
+            <Nav />
+          </header>
           <main className="max-w-4xl mx-auto mt-6">{children}</main>
         </ThemeContext>
       </body>

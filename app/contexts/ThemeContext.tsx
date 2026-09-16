@@ -1,9 +1,8 @@
 "use client";
 
 import { createContext, ReactNode, useContext } from "react";
-import { setThemeCookie } from "../actions";
 
-export type Theme = "light" | "dark";
+export type Theme = "light" | "dark" | null;
 
 interface ThemeType {
   // theme: Theme;
@@ -16,11 +15,9 @@ const Context = createContext<ThemeType>({
 });
 
 export default function ThemeContext({ children }: { children: ReactNode }) {
-  // const [theme, setTheme] = useState<Theme>("dark");
-
   function updateTheme(theme: Theme) {
-    // setTheme(theme);
-    setThemeCookie(theme); // no need to save the theme with state, the server action keeps rerendering the root layout
+    localStorage.setItem("theme", theme!);
+    document.documentElement.classList.toggle("dark", theme == "dark");
   }
 
   return <Context value={{ updateTheme }}>{children}</Context>;
